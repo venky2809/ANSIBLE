@@ -6,7 +6,6 @@
   tags: provisioning
 
   pre_tasks:
-
     - name: Gather facts
       setup:
             
@@ -15,16 +14,16 @@
         msg: "Using Python {{ ansible_python_version }}"
               
     - name: Install dependencies
-      shell: "/usr/bin/python3.10 -m pip install {{ item }}"
+      shell: "/usr/bin/python3.12 -m pip install {{ item }}"
       loop:
-       - boto3
-       - botocore
+        - boto3
+        - botocore
 
   vars:
     ansible_python_interpreter: /usr/bin/python3.12
-    keypair: Mumbai
+    keypair: jenkins
     instance_type: t2.micro
-    image_id: ami-0f5ee92e2d63afc18
+    image_id: ami-046c2381f11878233 
     wait: yes
     group: webserver
     count: 1
@@ -74,10 +73,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         count: "{{ count }}"
-<<<<<<< HEAD:ec2.yml
-=======
         tags: "{{ tag_name }}"
->>>>>>> 8a4f7adb77293a7d086f98dfa3d01770078bbc46:ec2.yaml
         user_data: |
           #!/bin/bash
           sudo apt update -y
